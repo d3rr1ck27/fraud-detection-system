@@ -1,0 +1,11 @@
+com\derricklove\frauddetection\controller\TransactionController.class
+com\derricklove\frauddetection\repository\TransactionRepository.class
+com\derricklove\frauddetection\model\FeaturesConverter.class
+com\derricklove\frauddetection\model\Transaction$Builder.class
+com\derricklove\frauddetection\model\Transaction.class
+com\derricklove\frauddetection\service\MlServiceClient.class
+com\derricklove\frauddetection\service\MlPredictionResponse.class
+com\derricklove\frauddetection\service\TransactionService.class
+com\derricklove\frauddetection\config\AppConfig.class
+com\derricklove\frauddetection\controller\TransactionRequest.class
+com\derricklove\frauddetection\FraudDetectionApplication.class

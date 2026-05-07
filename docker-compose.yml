@@ -1,0 +1,35 @@
+version: "3.9"
+
+services:
+  backend:
+    build:
+      context: ./backend
+    container_name: fraud-detection-backend
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      - ML_SERVICE_URL=http://ml-service:8000
+    depends_on:
+      - ml-service
+
+  ml-service:
+    build:
+      context: ./ml-service
+    container_name: fraud-detection-ml-service
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./ml-service/model:/app/model
+      - ./ml-service/data:/app/data
+
+  frontend:
+    build:
+      context: ./frontend
+    container_name: fraud-detection-frontend
+    ports:
+      - "3000:3000"
+    environment:
+      - REACT_APP_API_URL=http://localhost:8080
+    depends_on:
+      - backend
