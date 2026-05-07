@@ -6,6 +6,7 @@ import com.derricklove.frauddetection.service.TransactionService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,8 +24,15 @@ import java.util.List;
  * read-only listing endpoint, since wrapping a single {@code findAll()} in a
  * service method would add no value.</p>
  */
+// CORS — see AppConfig.corsConfigurer for the global policy. We also
+// declare the dev origin here at the controller level so the rule lives
+// next to the endpoints it protects: when someone reads this controller
+// in isolation, it's obvious that the React dev server (port 3000) is
+// allowed to call these handlers. Spring merges this with the global
+// mapping; the more specific rule wins for this controller.
 @RestController
 @RequestMapping("/api/transactions")
+@CrossOrigin(origins = "http://localhost:3000")
 public class TransactionController {
 
     private final TransactionService transactionService;

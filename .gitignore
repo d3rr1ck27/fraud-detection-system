@@ -1,0 +1,20 @@
+# Java/Maven
+backend/target/
+*.class
+*.jar
+# Python
+ml-service/__pycache__/
+ml-service/*.pyc
+ml-service/model/*.pkl
+ml-service/data/creditcard.csv
+ml-service/.venv/
+*.egg-info/
+# React/Node
+frontend/node_modules/
+frontend/build/
+# IntelliJ
+.idea/
+*.iml
+# General
+.env
+*.log
