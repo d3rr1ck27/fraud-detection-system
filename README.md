@@ -1,19 +1,16 @@
 # Fraud Detection System
-
-A multi-service fraud detection platform combining a Spring Boot backend, a Python machine learning service, and a React frontend. The backend exposes the public API and orchestrates business logic, the ML service serves trained models for real-time scoring, and the frontend provides the analyst-facing dashboard for reviewing flagged transactions.
-
+A three-tier full-stack fraud detection system combining a React dashboard, Spring Boot REST API, and a Python FastAPI ML microservice trained on real credit card transaction data.
 ## Architecture
-
-- **backend/** — Java / Spring Boot service (Maven). Hosts REST controllers, persistence, and integration with the ML service.
-- **ml-service/** — Python / FastAPI service. Loads scikit-learn models and returns fraud probability scores.
-- **frontend/** — React single-page app for analysts and administrators.
-
-## Getting started
-
-The repository ships with a `docker-compose.yml` stub that runs all three services together. Replace the placeholder image references with real builds (or a `build:` context) once each service has a Dockerfile, then run:
-
-```
-docker compose up --build
-```
-
-Each service can also be run independently during development; see the README inside each directory (to be added) for service-specific instructions.
+React Frontend (port 3000) → Spring Boot Backend (port 8080) → FastAPI ML Service (port 8000) → Random Forest Model
+## Tech Stack
+- Frontend: React, JavaScript, CSS
+- Backend: Spring Boot, Java, Spring Data JPA, H2 (dev) / PostgreSQL (prod)
+- ML Service: Python, FastAPI, scikit-learn, Random Forest, SMOTE, pandas, NumPy
+- Tools: Maven, Git, Docker (coming soon)
+## Model Performance
+- Dataset: Kaggle Credit Card Fraud Detection (284,807 transactions, 0.17% fraud rate)
+- Algorithm: Random Forest Classifier (100 estimators)
+- Class imbalance handled with SMOTE oversampling
+- ROC-AUC Score: 0.9731
+- Fraud Precision: 84.5%
+- Fraud Recall: 83.7

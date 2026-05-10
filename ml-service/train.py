@@ -38,7 +38,7 @@ SCALER_PATH = MODEL_DIR / "scaler.pkl"
 RANDOM_STATE = 42
 
 
-def main() -> None:
+def train() -> None:
     # -----------------------------------------------------------------------
     # 1. Load the dataset
     # -----------------------------------------------------------------------
@@ -144,4 +144,4 @@ def main() -> None:
 
 
 if __name__ == "__main__":
-    main()
+    train()

@@ -71,7 +71,23 @@ state: dict = {
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    """Load model and scaler once when the app starts."""
+    """Load model and scaler once when the app starts.
+
+    If the artifacts don't exist on disk yet, run the training pipeline
+    first so the service is always ready to serve predictions after startup.
+    """
+    if not MODEL_PATH.exists() or not SCALER_PATH.exists():
+        print(
+            f"Model artifacts not found at {MODEL_PATH} / {SCALER_PATH}. "
+            "Running training pipeline ..."
+        )
+        # Imported lazily so the (heavy) training dependencies aren't pulled
+        # in during normal startup once the artifacts exist.
+        from train import train
+
+        train()
+        print("Training pipeline complete.")
+
     try:
         state["model"] = joblib.load(MODEL_PATH)
         state["scaler"] = joblib.load(SCALER_PATH)
