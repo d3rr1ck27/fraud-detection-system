@@ -14,3 +14,9 @@ React Frontend (port 3000) → Spring Boot Backend (port 8080) → FastAPI ML Se
 - ROC-AUC Score: 0.9731
 - Fraud Precision: 84.5%
 - Fraud Recall: 83.7
+## Live Demo
+- Frontend: https://fraud-detection-system-omega.vercel.app
+- Backend API: https://fraud-detection-system-e4wl.onrender.com
+- ML Service: https://fraud-detection-system-production-9199.up.railway.app
+
+Note: The free tier backend on Render may take 50 seconds to wake up on first request after inactivity.
