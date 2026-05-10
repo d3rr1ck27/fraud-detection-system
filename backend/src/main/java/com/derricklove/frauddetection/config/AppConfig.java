@@ -62,7 +62,7 @@ public class AppConfig {
                 registry.addMapping("/**")
                         .allowedOrigins(
                                 "http://localhost:3000",
-                                "https://fraud-detection-frontend.vercel.app"
+                                "https://fraud-detection-system-omega.vercel.app"
                         )
                         .allowedMethods("*")
                         .allowedHeaders("*");
