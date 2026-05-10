@@ -7,6 +7,7 @@ ml-service/__pycache__/
 ml-service/*.pyc
 ml-service/model/*.pkl
 ml-service/data/creditcard.csv
+!ml-service/data/creditcard_sample.csv
 ml-service/.venv/
 *.egg-info/
 # React/Node

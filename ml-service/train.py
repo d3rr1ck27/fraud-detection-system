@@ -30,7 +30,9 @@ from sklearn.preprocessing import StandardScaler
 # Paths
 # ---------------------------------------------------------------------------
 BASE_DIR = Path(__file__).parent
-DATA_PATH = BASE_DIR / "data" / "creditcard.csv"
+DATA_DIR = BASE_DIR / "data"
+FULL_DATA_PATH = DATA_DIR / "creditcard.csv"
+SAMPLE_DATA_PATH = DATA_DIR / "creditcard_sample.csv"
 MODEL_DIR = BASE_DIR / "model"
 MODEL_PATH = MODEL_DIR / "fraud_model.pkl"
 SCALER_PATH = MODEL_DIR / "scaler.pkl"
@@ -38,12 +40,42 @@ SCALER_PATH = MODEL_DIR / "scaler.pkl"
 RANDOM_STATE = 42
 
 
+def resolve_dataset_path() -> Path:
+    """Resolve which dataset CSV to load.
+
+    Preference order:
+      1. data/creditcard.csv         (full dataset, used locally)
+      2. data/creditcard_sample.csv  (smaller sample, shipped for deployment)
+
+    Raises:
+        FileNotFoundError: if neither file is present.
+    """
+    if FULL_DATA_PATH.exists():
+        print(f"Using FULL dataset: {FULL_DATA_PATH}")
+        return FULL_DATA_PATH
+
+    if SAMPLE_DATA_PATH.exists():
+        print(f"Using SAMPLE dataset: {SAMPLE_DATA_PATH}")
+        return SAMPLE_DATA_PATH
+
+    raise FileNotFoundError(
+        "No dataset found. Expected one of:\n"
+        f"  - {FULL_DATA_PATH}\n"
+        f"  - {SAMPLE_DATA_PATH}\n"
+        "Place a credit-card transactions CSV at one of those paths "
+        "before running training."
+    )
+
+
 def train() -> None:
     # -----------------------------------------------------------------------
     # 1. Load the dataset
+    #    Prefer the full creditcard.csv when present; otherwise fall back to
+    #    the smaller creditcard_sample.csv that ships with the deployment.
     # -----------------------------------------------------------------------
-    print(f"Loading dataset from {DATA_PATH} ...")
-    df = pd.read_csv(DATA_PATH)
+    data_path = resolve_dataset_path()
+    print(f"Loading dataset from {data_path} ...")
+    df = pd.read_csv(data_path)
     print(f"  Loaded {df.shape[0]:,} rows, {df.shape[1]} columns.")
 
     # -----------------------------------------------------------------------
