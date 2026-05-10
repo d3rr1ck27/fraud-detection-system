@@ -3,7 +3,7 @@
 // and makes it easy to swap in axios, add auth headers, or change the
 // base URL in one place.
 
-const API_BASE_URL = "http://localhost:8080";
+const BASE_URL = process.env.REACT_APP_BACKEND_URL || 'http://localhost:8080';
 
 /**
  * POST a new transaction to the backend.
@@ -15,7 +15,7 @@ const API_BASE_URL = "http://localhost:8080";
  * @returns {Promise<object>} the saved transaction
  */
 export async function postTransaction(data) {
-  const response = await fetch(`${API_BASE_URL}/api/transactions`, {
+  const response = await fetch(`${BASE_URL}/api/transactions`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data),
@@ -36,7 +36,7 @@ export async function postTransaction(data) {
  * @returns {Promise<object[]>} list of saved transactions
  */
 export async function getTransactions() {
-  const response = await fetch(`${API_BASE_URL}/api/transactions`);
+  const response = await fetch(`${BASE_URL}/api/transactions`);
 
   if (!response.ok) {
     const text = await response.text();

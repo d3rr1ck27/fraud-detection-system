@@ -32,7 +32,10 @@ import java.util.List;
 // mapping; the more specific rule wins for this controller.
 @RestController
 @RequestMapping("/api/transactions")
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = {
+        "http://localhost:3000",
+        "https://fraud-detection-frontend.vercel.app"
+})
 public class TransactionController {
 
     private final TransactionService transactionService;
