@@ -1,0 +1,7 @@
+[build]
+builder = "nixpacks"
+[deploy]
+startCommand = "java -jar target/fraud-detection-backend-0.0.1-SNAPSHOT.jar"
+healthcheckPath = "/api/transactions"
+healthcheckTimeout = 120
+restartPolicyType = "on_failure"
